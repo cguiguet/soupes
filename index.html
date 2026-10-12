@@ -1,0 +1,1641 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7a55c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Six recettes de soupes qui fument. Touille, coche, mijote.">
+<title>Soupes. — six recettes qui fument</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@property --bg1 { syntax: '<color>'; inherits: true; initial-value: #ffe1b8; }
+@property --bg2 { syntax: '<color>'; inherits: true; initial-value: #f7a55c; }
+@property --bg3 { syntax: '<color>'; inherits: true; initial-value: #e5793a; }
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #d9581a; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: #2e1405; }
+
+:root {
+  --paper: #fbf5ea;
+  --cw: min(80vw, 340px);
+  transition: --bg1 1.2s ease, --bg2 1.2s ease, --bg3 1.2s ease, --accent .8s ease, --ink .8s ease;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+body {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  color: var(--ink);
+  background: radial-gradient(130% 90% at 50% 26%, var(--bg1) 0%, var(--bg2) 62%, var(--bg3) 100%);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none; -webkit-user-select: none;
+}
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+.fr { font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'SOFT' 100, 'WONK' 1; }
+
+/* ---------- background layers ---------- */
+.marquee { position: fixed; left: 0; width: 100%; z-index: 0; pointer-events: none; overflow: hidden; white-space: nowrap; }
+.marquee .track { display: inline-flex; animation: marq 46s linear infinite; }
+.marquee.m1 { top: 11dvh; }
+.marquee.m1 span {
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 800;
+  font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+  font-size: clamp(110px, 23dvh, 260px); line-height: 1; letter-spacing: -.045em; padding-right: .25em;
+  color: rgba(255, 255, 255, .22);
+  color: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.marquee.m2 { top: 49dvh; }
+.marquee.m2 .track { animation-duration: 30s; animation-direction: reverse; }
+.marquee.m2 span {
+  font-weight: 700; font-size: clamp(14px, 2.2dvh, 22px); letter-spacing: .32em; text-transform: uppercase;
+  color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 35%, transparent); padding-right: 1em;
+}
+@keyframes marq { to { transform: translateX(-50%); } }
+.grain {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .25  0 0 0 0 .1  0 0 0 0 0  0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+#gl { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; touch-action: none; display: block; }
+
+/* ---------- UI ---------- */
+.ui { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
+.top {
+  position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: flex-start;
+  padding: calc(env(safe-area-inset-top) + 14px) 18px 0;
+}
+.logo { font-family: 'Fraunces', serif; font-weight: 800; font-size: 32px; line-height: 1; letter-spacing: -.035em; font-variation-settings: 'SOFT' 100, 'WONK' 1; }
+.logo i { color: var(--accent); font-style: normal; display: inline-block; animation: hop 2.4s ease-in-out infinite; }
+.logo small { display: block; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; opacity: .6; margin-top: 5px; }
+@keyframes hop { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(-7px); } 90% { transform: translateY(1px); } }
+.actions { display: flex; gap: 8px; pointer-events: auto; }
+.icon-btn {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(255, 250, 240, .55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 8px 24px -10px rgba(60, 20, 0, .45);
+  transition: transform .25s cubic-bezier(.3, 1.6, .5, 1);
+}
+.icon-btn:active { transform: scale(.86) rotate(-8deg); }
+.icon-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.bottom {
+  position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 14px); transition: opacity .5s, transform .6s cubic-bezier(.7, 0, .2, 1);
+}
+.ui.sheet-open .bottom { opacity: 0; transform: translateY(40px); }
+.ui.sheet-open .bottom .cards { pointer-events: none; }
+.hint {
+  display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; padding: 8px 14px 8px 10px; border-radius: 99px;
+  background: rgba(255, 250, 240, .6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s;
+}
+.hint.on { opacity: 1; transform: none; }
+.hint .finger { display: inline-block; font-size: 18px; animation: stir 1.6s ease-in-out infinite; }
+@keyframes stir { 0% { transform: translate(0, 0) rotate(0); } 25% { transform: translate(6px, -3px) rotate(10deg); } 50% { transform: translate(0, -6px); } 75% { transform: translate(-6px, -3px) rotate(-10deg); } 100% { transform: translate(0, 0); } }
+
+.cards {
+  position: relative; pointer-events: auto; width: 100%; display: flex; gap: 14px; overflow-x: auto; overflow-y: visible;
+  scroll-snap-type: x mandatory; padding: 14px calc(50% - var(--cw) / 2) 18px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.cards::-webkit-scrollbar { display: none; }
+.card {
+  position: relative; flex: 0 0 var(--cw); scroll-snap-align: center; border-radius: 30px; padding: 18px 18px 16px; overflow: hidden;
+  background: rgba(255, 251, 244, .74); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 24px 50px -24px rgba(60, 20, 0, .55);
+  transform-origin: 50% 130%; will-change: transform; cursor: pointer;
+}
+.card .blob {
+  position: absolute; right: -34px; top: -38px; width: 128px; height: 128px; background: var(--c);
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; animation: blob 9s ease-in-out infinite;
+  box-shadow: inset -10px -14px 0 rgba(0, 0, 0, .08), inset 10px 10px 18px rgba(255, 255, 255, .35);
+}
+@keyframes blob {
+  0%, 100% { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; transform: rotate(0); }
+  33% { border-radius: 61% 39% 45% 55% / 52% 63% 37% 48%; transform: rotate(40deg); }
+  66% { border-radius: 36% 64% 52% 48% / 60% 37% 63% 40%; transform: rotate(-25deg); }
+}
+.card .emo { position: absolute; right: 14px; top: 14px; font-size: 22px; display: flex; gap: 0; }
+.card .emo span { display: inline-block; animation: float 3s ease-in-out infinite; animation-delay: calc(var(--d) * -1s); margin-left: -4px; }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-5px) rotate(6deg); } }
+.card .num { font-family: 'Fraunces', serif; font-weight: 400; font-size: 12px; letter-spacing: .18em; opacity: .7; }
+.card h2 { position: relative; font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 750; font-size: 27px; line-height: 1.02; letter-spacing: -.025em; margin-top: 8px; max-width: 86%; }
+.card .sub { font-family: 'Fraunces', serif; font-style: italic; opacity: .72; font-size: 16px; margin-top: 3px; }
+.chips { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.chips span { font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 99px; background: rgba(43, 22, 8, .07); }
+.open {
+  margin-top: 14px; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 13px 16px; border-radius: 17px;
+  background: var(--ink); color: #fff6ea; font-weight: 600; font-size: 15px; transition: transform .2s;
+}
+.open:active { transform: scale(.97); }
+.open svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+.card:hover .open svg { transform: translateX(4px) rotate(-10deg); }
+.dots { display: flex; gap: 6px; pointer-events: auto; }
+.dots i { width: 6px; height: 6px; border-radius: 9px; background: var(--ink); opacity: .22; transition: width .45s cubic-bezier(.3, 1.4, .5, 1), opacity .3s; }
+.dots i.on { width: 24px; opacity: .85; }
+
+/* ---------- recipe sheet ---------- */
+.backdrop { position: fixed; inset: 0; z-index: 6; background: rgba(30, 12, 0, .16); opacity: 0; pointer-events: none; transition: opacity .5s; }
+.backdrop.on { opacity: 1; pointer-events: auto; }
+.sheet {
+  position: fixed; z-index: 7; left: 0; right: 0; bottom: 0; height: 73dvh; max-width: 680px; margin: 0 auto;
+  background: var(--paper); border-radius: 32px 32px 0 0; box-shadow: 0 -24px 70px -24px rgba(40, 15, 0, .5);
+  transform: translateY(110%); display: flex; flex-direction: column; visibility: hidden;
+  user-select: text; -webkit-user-select: text;
+}
+@media (min-width: 900px) {
+  .sheet { left: auto; right: 18px; top: 18px; bottom: 18px; height: auto; width: 500px; margin: 0; border-radius: 32px; transform: translateX(120%); }
+}
+.sheet-grab { flex: none; height: 30px; display: grid; place-items: center; cursor: grab; touch-action: none; }
+.sheet-grab span { width: 46px; height: 5px; border-radius: 9px; background: rgba(43, 22, 8, .18); }
+.sheet-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; background: rgba(43, 22, 8, .07); display: grid; place-items: center; z-index: 2; transition: transform .3s; }
+.sheet-close:active { transform: rotate(90deg) scale(.9); }
+.sheet-close svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.sheet-scroll { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 4px 22px calc(46px + env(safe-area-inset-bottom)); -webkit-overflow-scrolling: touch; }
+
+.eyebrow { font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+.r-title { font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: clamp(40px, 11.5vw, 58px); line-height: .94; letter-spacing: -.04em; margin: 10px 40px 8px 0; }
+.r-title .w { display: inline-block; white-space: nowrap; }
+.r-title .ch { display: inline-block; }
+.r-sub { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; line-height: 1.3; opacity: .75; }
+.r-stats { display: grid; grid-template-columns: 1fr 1fr 1.45fr; gap: 8px; margin: 20px 0 4px; }
+.stat { background: #fff; border-radius: 18px; padding: 12px 12px 10px; display: flex; flex-direction: column; justify-content: space-between; gap: 4px; box-shadow: 0 1px 0 rgba(43, 22, 8, .05); }
+.stat b { font-family: 'Fraunces', serif; font-size: 23px; font-weight: 700; line-height: 1; }
+.stat small { font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; opacity: .55; font-weight: 700; }
+.serves .row { display: flex; align-items: center; justify-content: space-between; }
+.serves button { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 20px; font-weight: 700; line-height: 1; display: grid; place-items: center; transition: transform .2s cubic-bezier(.3, 1.8, .5, 1); }
+.serves button:active { transform: scale(.82); }
+.serves b { display: inline-block; min-width: 1.4em; text-align: center; }
+.r-sec h3 { font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 26px; font-weight: 750; letter-spacing: -.02em; margin: 28px 0 10px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.r-sec h3 small { font-family: 'Instrument Sans', sans-serif; font-size: 12px; font-weight: 600; opacity: .6; letter-spacing: 0; }
+.progress { height: 6px; background: rgba(43, 22, 8, .08); border-radius: 9px; overflow: hidden; margin-bottom: 12px; }
+.progress i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 9px; transition: width .6s cubic-bezier(.2, 1.2, .3, 1); }
+.ings { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.ing {
+  width: 100%; display: grid; grid-template-columns: 24px 28px auto 1fr; align-items: center; gap: 10px; text-align: left;
+  padding: 11px 12px; border-radius: 16px; background: #fff; transition: background .3s, transform .18s; font-size: 15px;
+}
+.ing:active { transform: scale(.975); }
+.ing .box { width: 24px; height: 24px; border-radius: 8px; border: 2px solid rgba(43, 22, 8, .2); display: grid; place-items: center; transition: background .25s, border-color .25s, transform .4s cubic-bezier(.3, 1.8, .5, 1); }
+.ing .box svg { width: 14px; height: 14px; stroke: #fff; stroke-width: 3.2; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 22; stroke-dashoffset: 22; transition: stroke-dashoffset .35s .08s; }
+.ing.on { background: color-mix(in srgb, var(--accent) 9%, #fff); }
+.ing.on .box { background: var(--accent); border-color: var(--accent); transform: rotate(-8deg) scale(1.08); }
+.ing.on .box svg { stroke-dashoffset: 0; }
+.ing .e { font-size: 22px; line-height: 1; text-align: center; }
+.ing .q { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; transition: opacity .3s; }
+.ing .n { position: relative; transition: opacity .3s; line-height: 1.25; }
+.ing .n::after { content: ''; position: absolute; left: 0; top: 52%; height: 2px; width: 0; background: currentColor; border-radius: 2px; transition: width .4s cubic-bezier(.6, 0, .2, 1); }
+.ing.on .n::after { width: 100%; }
+.ing.on .n, .ing.on .q { opacity: .42; }
+.mini { font-size: 12.5px; opacity: .6; margin-top: 10px; text-align: center; font-weight: 500; }
+.steps { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.step { display: grid; grid-template-columns: 42px 1fr; gap: 10px; padding: 15px 15px 15px 12px; border-radius: 20px; background: #fff; cursor: pointer; transition: opacity .35s, transform .2s; }
+.step:active { transform: scale(.985); }
+.step .sn { font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-size: 38px; font-weight: 800; line-height: .9; color: var(--accent); text-align: center; position: relative; }
+.step.done { opacity: .45; }
+.step.done .sn::after { content: '✓'; position: absolute; inset: 0; display: grid; place-items: center; font-size: 26px; color: #fff; background: var(--accent); border-radius: 50%; width: 38px; height: 38px; }
+.step p { font-size: 16px; line-height: 1.45; }
+.tmr { margin-top: 10px; display: inline-flex; gap: 6px; align-items: center; padding: 8px 13px; border-radius: 99px; background: color-mix(in srgb, var(--accent) 15%, #fff); font-weight: 700; font-size: 13px; transition: transform .2s; }
+.tmr:active { transform: scale(.93); }
+.tip { margin-top: 44px; position: relative; padding: 22px 18px 20px; border-radius: 24px; background: var(--ink); color: #fff6ea; }
+.tip .badge { position: absolute; top: -34px; right: 12px; width: 84px; height: 84px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
+.tip .badge svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 12s linear infinite; }
+.tip .badge text { font-family: 'Instrument Sans', sans-serif; font-weight: 700; font-size: 11.5px; letter-spacing: .18em; fill: #fff; text-transform: uppercase; }
+.tip .badge span { font-size: 28px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.tip p { font-family: 'Fraunces', serif; font-size: 19px; line-height: 1.38; font-style: italic; padding-right: 54px; }
+.r-end { text-align: center; font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1; font-style: italic; font-weight: 600; font-size: 30px; margin: 40px 0 6px; }
+.r-end span { display: inline-block; animation: hop 2s ease-in-out infinite; }
+
+/* ---------- timer / toast / burst ---------- */
+.timer {
+  position: fixed; z-index: 9; top: calc(env(safe-area-inset-top) + 12px); left: 50%; transform: translate(-50%, -160%);
+  display: flex; align-items: center; gap: 10px; padding: 7px 8px 7px 8px; border-radius: 99px; background: var(--ink); color: #fff6ea;
+  box-shadow: 0 16px 40px -14px rgba(0, 0, 0, .55); transition: transform .6s cubic-bezier(.2, 1.4, .3, 1); cursor: pointer;
+}
+.timer.on { transform: translate(-50%, 0); }
+.timer.done { animation: shake .45s 4; background: var(--accent); }
+@keyframes shake { 0%, 100% { margin-left: 0; } 25% { margin-left: -6px; } 75% { margin-left: 6px; } }
+.timer .ring { width: 32px; height: 32px; transform: rotate(-90deg); }
+.timer .ring circle { fill: none; stroke-width: 4; }
+.timer .tl { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 17px; }
+.timer .tn { font-size: 12px; opacity: .7; margin-right: 4px; }
+.timer .x { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, .12); display: grid; place-items: center; font-size: 16px; }
+.toast {
+  position: fixed; z-index: 11; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 26px); transform: translateX(-50%);
+  background: var(--ink); color: #fff6ea; padding: 12px 18px; border-radius: 99px; font-weight: 600; font-size: 14px; white-space: nowrap;
+  opacity: 0; pointer-events: none; box-shadow: 0 16px 40px -14px rgba(0, 0, 0, .55);
+}
+.burst { position: fixed; left: 0; top: 0; z-index: 12; font-size: 30px; pointer-events: none; will-change: transform; }
+
+/* ---------- intro ---------- */
+.intro {
+  position: fixed; inset: 0; z-index: 20; background: #2a1205; color: #fff1dc; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  clip-path: inset(0 0 0% 0);
+}
+.intro h1 { font-family: 'Fraunces', Georgia, serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: clamp(72px, 22vw, 170px); letter-spacing: -.045em; display: flex; line-height: 1; }
+.intro h1 span { display: inline-block; animation: wave 1.3s ease-in-out infinite; animation-delay: calc(var(--i) * .09s); }
+.intro h1 span:last-child { color: #f28a2e; }
+@keyframes wave { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-16px) rotate(-4deg); } }
+.intro p { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; opacity: .7; }
+.intro .steam { display: flex; gap: 10px; height: 40px; margin-bottom: -6px; }
+.intro .steam i { width: 6px; height: 34px; border-radius: 9px; background: linear-gradient(#fff1dc00, #fff1dc88); animation: rise 1.6s ease-in-out infinite; animation-delay: calc(var(--i) * .25s); }
+@keyframes rise { 0% { transform: translateY(14px) scaleY(.4); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-14px) scaleY(1) skewX(14deg); opacity: 0; } }
+.nogl { position: fixed; inset: 0; display: none; place-items: center; text-align: center; padding: 30px; z-index: 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .card .blob, .card .emo span, .logo i { animation: none; }
+}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+    "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm"
+  }
+}
+</script>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="marquee m1" aria-hidden="true"><div class="track"><span></span><span></span></div></div>
+<div class="marquee m2" aria-hidden="true"><div class="track"><span></span><span></span></div></div>
+<canvas id="gl" aria-label="Bol de soupe en 3D : glisse le doigt pour touiller, tape pour ajouter un ingrédient"></canvas>
+
+<div class="ui">
+  <header class="top">
+    <div class="logo">Soupes<i>.</i><small>six recettes qui fument</small></div>
+    <div class="actions">
+      <button class="icon-btn" id="dice" aria-label="Soupe au hasard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.2" fill="currentColor"/></svg>
+      </button>
+      <button class="icon-btn" id="sound" aria-label="Son">
+        <svg viewBox="0 0 24 24" class="on-ic"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+        <svg viewBox="0 0 24 24" class="off-ic" style="display:none"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="bottom">
+    <div class="hint" id="hint"><span class="finger">👆</span><span>Touille avec ton doigt · tape pour ajouter</span></div>
+    <div class="cards" id="cards"></div>
+    <div class="dots" id="dots"></div>
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Recette">
+  <div class="sheet-grab" id="grab"><span></span></div>
+  <button class="sheet-close" id="close" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="sheet-scroll" id="sheetScroll"></div>
+</section>
+
+<div class="timer" id="timer" role="status">
+  <svg class="ring" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" stroke="rgba(255,255,255,.18)"/><circle id="ringFg" cx="16" cy="16" r="12" stroke="#fff" stroke-linecap="round" stroke-dasharray="75.4" stroke-dashoffset="0"/></svg>
+  <span class="tl" id="tl">00:00</span><span class="tn" id="tn"></span><span class="x" aria-label="Arrêter">×</span>
+</div>
+<div class="toast" id="toast"></div>
+<div class="nogl" id="nogl"><p class="fr" style="font-size:22px">Ton navigateur ne veut pas faire chauffer la marmite 3D 😢<br>Essaie avec Chrome ou Safari récent.</p></div>
+
+<div class="intro" id="intro">
+  <div class="steam"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i></div>
+  <h1><span style="--i:0">S</span><span style="--i:1">o</span><span style="--i:2">u</span><span style="--i:3">p</span><span style="--i:4">e</span><span style="--i:5">s</span><span style="--i:6">.</span></h1>
+  <p>on fait chauffer la marmite…</p>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { gsap } from 'gsap';
+
+/* =====================================================================
+   RECETTES
+   q: quantité pour `serves` personnes · u: unité · t / tp: libellé singulier / pluriel
+   s: ce qui tombe dans le bol quand on coche (forme 3D, ou "pour:<couleur>" pour un liquide)
+   ===================================================================== */
+const SOUPS = [
+  {
+    short: 'Potimarron', name: 'Velouté de potimarron', sub: '& châtaignes grillées', season: "soupe d'automne",
+    tagline: "Le doudou orange de l'automne. Pas besoin de l'éplucher, promis.",
+    time: 40, level: 'Facile', serves: 4,
+    theme: { bg1: '#ffe1b8', bg2: '#f7a55c', bg3: '#e5793a', accent: '#d9581a', ink: '#2e1405' },
+    gl: { color: '#e66f1c', cream: '#fff0d2', creamAmt: .9, oil: '#f2a33a', oilAmt: .15, speck: '#5a3a1a', speckAmt: .25, glaze: '#26473c' },
+    rain: ['pumpkin', 'pumpkin', 'chestnut', 'seed', 'onion'],
+    emo: ['🎃', '🌰', '🧡'],
+    ingredients: [
+      { q: 1, t: 'potimarron (env. 1,2 kg)', tp: 'potimarrons (env. 1,2 kg pièce)', e: '🎃', s: 'pumpkin' },
+      { q: 1, t: 'oignon jaune', tp: 'oignons jaunes', e: '🧅', s: 'onion' },
+      { q: 200, u: 'g', t: 'de châtaignes cuites', e: '🌰', s: 'chestnut' },
+      { q: 1, u: 'L', t: 'de bouillon de légumes', e: '🫗', s: 'pour:#e9c27c' },
+      { q: 20, u: 'cl', t: 'de crème liquide (ou lait de coco)', e: '🥛', s: 'pour:#fffaf0' },
+      { q: 20, u: 'g', t: 'de beurre', e: '🧈', s: 'butter' },
+      { q: 1, u: 'pincée', t: 'de muscade', e: '✨', s: 'spice' },
+      { q: 2, u: 'c. à s.', t: 'de graines de courge', e: '🌱', s: 'seed' },
+      { q: null, t: 'Sel, poivre', e: '🧂', s: 'spice' },
+    ],
+    steps: [
+      { t: "Lave le potimarron — inutile de l'éplucher, sa peau fond à la cuisson. Coupe-le en deux, retire les graines et détaille-le en gros cubes." },
+      { t: "Dans une cocotte, fais fondre le beurre et fais revenir l'oignon émincé, sans coloration.", min: 5, label: 'Oignon' },
+      { t: "Ajoute le potimarron et les ¾ des châtaignes. Couvre de bouillon, porte à ébullition puis laisse mijoter à couvert.", min: 25, label: 'Mijoter' },
+      { t: "Mixe longuement avec la crème, la muscade, sel et poivre, jusqu'à obtenir un vrai velours." },
+      { t: "Pendant ce temps, toaste à sec les graines de courge et le reste des châtaignes concassées.", min: 3, label: 'Toaster' },
+      { t: "Sers brûlant, avec une spirale de crème et le croquant par-dessus." },
+    ],
+    tip: "Un filet d'huile de noisette au moment de servir, et c'est le grand frisson.",
+  },
+  {
+    short: 'Oignon', name: "Soupe à l'oignon", sub: 'gratinée, comme au bistrot', season: 'classique du zinc',
+    tagline: 'Patience, beurre et comté : la sainte trinité du bistrot parisien.',
+    time: 75, level: 'Moyen', serves: 4,
+    theme: { bg1: '#f7dcb6', bg2: '#d9a066', bg3: '#a8632e', accent: '#a3521b', ink: '#2a1406' },
+    gl: { color: '#9b5f26', cream: '#f0c860', creamAmt: .45, oil: '#e8b04a', oilAmt: .5, speck: '#2a1a0a', speckAmt: .3, glaze: '#1f2a44' },
+    rain: ['onion', 'onion', 'crouton', 'cheese', 'thyme'],
+    emo: ['🧅', '🧀', '🥖'],
+    ingredients: [
+      { q: 1, u: 'kg', t: "d'oignons jaunes", e: '🧅', s: 'onion' },
+      { q: 50, u: 'g', t: 'de beurre', e: '🧈', s: 'butter' },
+      { q: 1, u: 'c. à s.', t: 'de farine', e: '🌾', s: 'pour:#f7f3ea' },
+      { q: 15, u: 'cl', t: 'de vin blanc sec', e: '🍷', s: 'pour:#f1e3a2' },
+      { q: 1.5, u: 'L', t: 'de bouillon de bœuf (ou de légumes)', e: '🫗', s: 'pour:#b27a3e' },
+      { q: 2, u: 'brin', t: 'de thym', e: '🌿', s: 'thyme' },
+      { q: 1, u: 'feuille', t: 'de laurier', e: '🍃', s: 'bay' },
+      { q: 8, u: 'tranche', t: 'de baguette rassise', e: '🥖', s: 'crouton' },
+      { q: 150, u: 'g', t: 'de comté râpé', e: '🧀', s: 'cheese' },
+      { q: null, t: 'Sel, poivre', e: '🧂', s: 'spice' },
+    ],
+    steps: [
+      { t: "Émince finement les oignons. Oui, tu vas pleurer. C'est normal, c'est le prix." },
+      { t: "Fais-les fondre dans le beurre à feu doux, en remuant souvent, jusqu'à ce qu'ils soient bien blonds et caramélisés.", min: 40, label: 'Caraméliser' },
+      { t: "Saupoudre de farine, remue 1 minute, puis déglace au vin blanc en grattant bien le fond." },
+      { t: "Verse le bouillon, ajoute thym et laurier, sale, poivre et laisse mijoter.", min: 20, label: 'Mijoter' },
+      { t: "Fais griller les tranches de baguette et allume le gril du four." },
+      { t: "Répartis la soupe dans des bols allant au four, pose le pain, couvre généreusement de comté et gratine jusqu'à ce que ça bulle.", min: 5, label: 'Gratiner' },
+    ],
+    tip: "Ne presse jamais la caramélisation : feu doux et 40 minutes, c'est là que naît tout le goût.",
+  },
+  {
+    short: 'Minestrone', name: 'Minestrone', sub: 'le potager dans un bol', season: 'soupe-repas italienne',
+    tagline: 'La soupe-repas italienne qui vide le frigo avec panache.',
+    time: 50, level: 'Facile', serves: 4,
+    theme: { bg1: '#ffe0cc', bg2: '#f08f6a', bg3: '#c9472d', accent: '#c23a1e', ink: '#2b0f07' },
+    gl: { color: '#c24a26', cream: '#e9cf7a', creamAmt: .12, oil: '#d9b237', oilAmt: .55, speck: '#2f6b2a', speckAmt: .5, glaze: '#2b5d8a' },
+    rain: ['carrot', 'bean', 'pasta', 'basil', 'zucchini', 'tomato', 'celery'],
+    emo: ['🍅', '🥕', '🌿'],
+    ingredients: [
+      { q: 2, t: 'carotte', tp: 'carottes', e: '🥕', s: 'carrot' },
+      { q: 2, u: 'branche', t: 'de céleri', e: '🥬', s: 'celery' },
+      { q: 1, t: 'oignon', tp: 'oignons', e: '🧅', s: 'onion' },
+      { q: 2, u: 'gousse', t: "d'ail", e: '🧄', s: 'garlic' },
+      { q: 1, t: 'courgette', tp: 'courgettes', e: '🥒', s: 'zucchini' },
+      { q: 400, u: 'g', t: 'de tomates concassées', e: '🍅', s: 'tomato' },
+      { q: 400, u: 'g', t: 'de haricots blancs cuits', e: '🫘', s: 'bean' },
+      { q: 100, u: 'g', t: 'de petites pâtes (ditalini)', e: '🍝', s: 'pasta' },
+      { q: 1.5, u: 'L', t: 'de bouillon de légumes', e: '🫗', s: 'pour:#e9c27c' },
+      { q: 1, t: 'croûte de parmesan', tp: 'croûtes de parmesan', e: '🧀', s: 'cheese' },
+      { q: 1, u: 'bouquet', t: 'de basilic', e: '🌿', s: 'basil' },
+      { q: 3, u: 'c. à s.', t: "d'huile d'olive", e: '🫒', s: 'pour:#c9b23c' },
+    ],
+    steps: [
+      { t: 'Taille carottes, céleri et oignon en petits dés réguliers : le fameux soffritto.' },
+      { t: "Fais-les suer dans l'huile d'olive à feu moyen.", min: 8, label: 'Soffritto' },
+      { t: "Ajoute l'ail haché et la courgette en dés, remue 2 minutes." },
+      { t: 'Verse les tomates et le bouillon, glisse la croûte de parmesan. Laisse mijoter.', min: 20, label: 'Mijoter' },
+      { t: "Ajoute les haricots et les pâtes, cuis jusqu'à ce qu'elles soient al dente.", min: 10, label: 'Pâtes' },
+      { t: "Retire la croûte, sers avec le basilic déchiré, du parmesan râpé et un trait d'huile d'olive." },
+    ],
+    tip: 'La croûte de parmesan, c\'est l\'arme secrète : garde-les toutes au congélateur pour tes soupes.',
+  },
+  {
+    short: 'Tom kha', name: 'Tom kha kaï', sub: 'coco, citronnelle & poulet', season: 'soupe thaïe',
+    tagline: 'Thaïe, soyeuse et acidulée : un câlin qui pique un peu.',
+    time: 30, level: 'Facile', serves: 4,
+    theme: { bg1: '#f4f7dc', bg2: '#cfe08a', bg3: '#8fb24a', accent: '#4f7d14', ink: '#1e2a08' },
+    gl: { color: '#efdcaa', cream: '#fffaf0', creamAmt: .5, oil: '#e0461e', oilAmt: .75, speck: '#3f8a2e', speckAmt: .45, glaze: '#7a2433' },
+    rain: ['mushroom', 'chili', 'lime', 'coriander', 'chicken', 'lemongrass'],
+    emo: ['🥥', '🌶️', '🍋'],
+    ingredients: [
+      { q: 800, u: 'ml', t: 'de lait de coco', e: '🥥', s: 'pour:#fbf7ee' },
+      { q: 500, u: 'ml', t: 'de bouillon de volaille', e: '🫗', s: 'pour:#e9c27c' },
+      { q: 400, u: 'g', t: 'de blancs de poulet', e: '🍗', s: 'chicken' },
+      { q: 3, u: 'tige', t: 'de citronnelle', e: '🌾', s: 'lemongrass' },
+      { q: 5, u: 'cm', t: 'de galanga (ou gingembre)', e: '🫚', s: 'ginger' },
+      { q: 5, u: 'feuille', t: 'de combava', e: '🍃', s: 'bay' },
+      { q: 200, u: 'g', t: 'de champignons', e: '🍄', s: 'mushroom' },
+      { q: 3, u: 'c. à s.', t: 'de sauce poisson', e: '🐟', s: 'pour:#9b5a1e' },
+      { q: 2, t: 'citron vert', tp: 'citrons verts', e: '🍋', s: 'lime' },
+      { q: 1, u: 'c. à c.', t: 'de sucre de palme', e: '🍯', s: 'pour:#d9a35a' },
+      { q: 2, t: 'piment oiseau', tp: 'piments oiseaux', e: '🌶️', s: 'chili' },
+      { q: 1, u: 'bouquet', t: 'de coriandre', e: '🌿', s: 'coriander' },
+    ],
+    steps: [
+      { t: 'Écrase la citronnelle du plat du couteau et coupe-la en tronçons. Tranche le galanga, déchire les feuilles de combava.' },
+      { t: 'Porte le lait de coco et le bouillon à frémissement avec tous les aromates.', min: 10, label: 'Infuser' },
+      { t: 'Ajoute le poulet en fines lamelles et les champignons émincés. Laisse cuire sans jamais faire bouillir.', min: 8, label: 'Pocher' },
+      { t: 'Hors du feu : sauce poisson, sucre, jus des citrons verts. Goûte et équilibre — salé, acide, sucré, piquant.' },
+      { t: 'Sers avec la coriandre et les piments écrasés.' },
+    ],
+    tip: "Les aromates parfument mais ne se mangent pas : on les laisse joliment au bord de l'assiette.",
+  },
+  {
+    short: 'Lentilles', name: 'Soupe de lentilles corail', sub: 'cumin, curcuma & citron', season: 'réconfort express',
+    tagline: 'Prête en 35 minutes, réconfortante comme un plaid épicé.',
+    time: 35, level: 'Facile', serves: 4,
+    theme: { bg1: '#fff0c2', bg2: '#f5c050', bg3: '#df8a1e', accent: '#c25f00', ink: '#2b1704' },
+    gl: { color: '#e0922a', cream: '#fff3dc', creamAmt: .55, oil: '#c92e14', oilAmt: .45, speck: '#3a6b22', speckAmt: .3, glaze: '#16324f' },
+    rain: ['lentil', 'lentil', 'lentil', 'carrot', 'coriander', 'lemon'],
+    emo: ['🫘', '🍋', '✨'],
+    ingredients: [
+      { q: 250, u: 'g', t: 'de lentilles corail', e: '🫘', s: 'lentil' },
+      { q: 1, t: 'oignon', tp: 'oignons', e: '🧅', s: 'onion' },
+      { q: 2, t: 'carotte', tp: 'carottes', e: '🥕', s: 'carrot' },
+      { q: 2, u: 'gousse', t: "d'ail", e: '🧄', s: 'garlic' },
+      { q: 3, u: 'cm', t: 'de gingembre frais', e: '🫚', s: 'ginger' },
+      { q: 1, u: 'c. à c.', t: 'de cumin', e: '✨', s: 'spice' },
+      { q: 1, u: 'c. à c.', t: 'de curcuma', e: '🟡', s: 'pour:#f2b81c' },
+      { q: .5, u: 'c. à c.', t: 'de paprika fumé', e: '🌶️', s: 'pour:#c43a1c' },
+      { q: 400, u: 'ml', t: 'de lait de coco', e: '🥥', s: 'pour:#fbf7ee' },
+      { q: 1, u: 'L', t: 'de bouillon de légumes', e: '🫗', s: 'pour:#e9c27c' },
+      { q: 1, t: 'citron', tp: 'citrons', e: '🍋', s: 'lemon' },
+      { q: 1, u: 'bouquet', t: 'de coriandre', e: '🌿', s: 'coriander' },
+    ],
+    steps: [
+      { t: "Rince les lentilles à l'eau froide jusqu'à ce que l'eau soit claire." },
+      { t: "Fais revenir l'oignon et les carottes en dés dans un filet d'huile.", min: 5, label: 'Revenir' },
+      { t: "Ajoute l'ail, le gingembre râpé et les épices. Remue 1 minute pour les réveiller." },
+      { t: 'Verse lentilles, bouillon et lait de coco. Laisse cuire à petits bouillons.', min: 20, label: 'Cuisson' },
+      { t: 'Mixe à moitié pour garder de la texture, ajoute le jus du citron, sale.' },
+      { t: "Sers avec la coriandre et un filet d'huile pimentée." },
+    ],
+    tip: 'Pas besoin de trempage : les lentilles corail fondent toutes seules en 20 minutes.',
+  },
+  {
+    short: 'Poireaux', name: 'Poireaux-pommes de terre', sub: 'le velouté de grand-mère', season: 'le grand classique',
+    tagline: "Le classique absolu. Chaud l'hiver, glacé l'été (bonjour vichyssoise).",
+    time: 35, level: 'Facile', serves: 4,
+    theme: { bg1: '#f3f6e4', bg2: '#cbd8a4', bg3: '#93a86a', accent: '#4e6d17', ink: '#1d2410' },
+    gl: { color: '#d3d79a', cream: '#fffcf0', creamAmt: .8, oil: '#c8c86a', oilAmt: .1, speck: '#2f7a26', speckAmt: .7, glaze: '#b8794a' },
+    rain: ['leek', 'leek', 'potato', 'chive', 'chive'],
+    emo: ['🥔', '🥬', '🌿'],
+    ingredients: [
+      { q: 3, t: 'poireau', tp: 'poireaux', e: '🥬', s: 'leek' },
+      { q: 500, u: 'g', t: 'de pommes de terre', e: '🥔', s: 'potato' },
+      { q: 1, t: 'oignon', tp: 'oignons', e: '🧅', s: 'onion' },
+      { q: 30, u: 'g', t: 'de beurre', e: '🧈', s: 'butter' },
+      { q: 1.2, u: 'L', t: 'de bouillon de volaille', e: '🫗', s: 'pour:#e9c27c' },
+      { q: 15, u: 'cl', t: 'de crème fraîche', e: '🥛', s: 'pour:#fffdf2' },
+      { q: 1, u: 'botte', t: 'de ciboulette', e: '🌿', s: 'chive' },
+      { q: null, t: 'Sel, poivre', e: '🧂', s: 'spice' },
+    ],
+    steps: [
+      { t: 'Nettoie les poireaux (le blanc et le vert tendre), fends-les en deux et rince bien le sable. Émince-les.' },
+      { t: "Fais-les suer avec l'oignon dans le beurre, sans coloration.", min: 10, label: 'Suer' },
+      { t: 'Ajoute les pommes de terre en cubes et le bouillon. Laisse cuire.', min: 20, label: 'Cuisson' },
+      { t: "Mixe, ajoute la crème, rectifie l'assaisonnement." },
+      { t: 'Parsème de ciboulette ciselée. Servie bien froide, elle devient une vichyssoise.' },
+    ],
+    tip: 'Choisis des pommes de terre farineuses (bintje) : ce sont elles qui donnent ce velouté si onctueux.',
+  },
+];
+
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const rand = (a = 1, b) => (b === undefined ? Math.random() * a : a + Math.random() * (b - a));
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const TAU = Math.PI * 2;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isDesk = () => matchMedia('(min-width: 900px)').matches;
+const buzz = (p) => { try { navigator.vibrate?.(p); } catch {} };
+
+const PLURAL = { pincée: 'pincées', gousse: 'gousses', tranche: 'tranches', brin: 'brins', tige: 'tiges', feuille: 'feuilles', branche: 'branches', bouquet: 'bouquets', botte: 'bottes' };
+function frac(x) {
+  const r = Math.max(.5, Math.round(x * 2) / 2);
+  const w = Math.floor(r), h = r - w > 0;
+  return w === 0 ? '½' : w + (h ? ' ½' : '');
+}
+function fmtQty(q, u) {
+  if (q == null) return '';
+  if (u === 'g' || u === 'ml' || u === 'cl') {
+    const step = q >= 100 ? 10 : 5;
+    return Math.max(step, Math.round(q / step) * step) + ' ' + u;
+  }
+  if (u === 'kg' || u === 'L') return String(Math.round(q * 10) / 10).replace('.', ',') + ' ' + u;
+  const n = Math.max(.5, Math.round(q * 2) / 2);
+  return frac(q) + (u ? ' ' + (n >= 2 && PLURAL[u] ? PLURAL[u] : u) : '');
+}
+const fmtName = (ing, q) => (q != null && Math.round(q * 2) / 2 >= 2 && ing.tp ? ing.tp : ing.t);
+
+/* =====================================================================
+   SON (WebAudio, tout est synthétisé)
+   ===================================================================== */
+const Sound = {
+  ctx: null, master: null, noise: null, last: 0,
+  on: localStorage.getItem('soupes-sound') !== 'off',
+  init() {
+    if (!this.ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      this.ctx = new AC();
+      this.master = this.ctx.createGain();
+      this.master.gain.value = .9;
+      this.master.connect(this.ctx.destination);
+      const len = this.ctx.sampleRate;
+      const b = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+      const d = b.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      this.noise = b;
+    }
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+  },
+  ok() { return this.on && this.ctx && this.ctx.state === 'running'; },
+  plop(p = 1, v = .22, when = 0) {
+    if (!this.ok()) return;
+    const c = this.ctx, t = c.currentTime + when;
+    if (!when && t - this.last < .035) return;
+    if (!when) this.last = t;
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(200 * p, t);
+    o.frequency.exponentialRampToValueAtTime(820 * p, t + .07);
+    g.gain.setValueAtTime(.0001, t);
+    g.gain.exponentialRampToValueAtTime(v, t + .008);
+    g.gain.exponentialRampToValueAtTime(.0001, t + .14);
+    o.connect(g).connect(this.master);
+    o.start(t); o.stop(t + .16);
+  },
+  pour() { for (let i = 0; i < 10; i++) this.plop(rand(1.3, 2.6), .06, .45 + i * .08 + rand(.05)); },
+  whoosh() {
+    if (!this.ok()) return;
+    const c = this.ctx, t = c.currentTime;
+    const s = c.createBufferSource(); s.buffer = this.noise;
+    const f = c.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 1.1;
+    f.frequency.setValueAtTime(260, t);
+    f.frequency.exponentialRampToValueAtTime(2200, t + .3);
+    f.frequency.exponentialRampToValueAtTime(380, t + .75);
+    const g = c.createGain();
+    g.gain.setValueAtTime(.0001, t);
+    g.gain.exponentialRampToValueAtTime(.16, t + .14);
+    g.gain.exponentialRampToValueAtTime(.0001, t + .75);
+    s.connect(f).connect(g).connect(this.master);
+    s.start(t); s.stop(t + .8);
+  },
+  ding() {
+    if (!this.ok()) return;
+    const c = this.ctx;
+    [0, .2, .4, .8].forEach((w, i) => {
+      const t = c.currentTime + w, o = c.createOscillator(), g = c.createGain();
+      o.type = 'triangle'; o.frequency.value = i === 3 ? 1318 : 880;
+      g.gain.setValueAtTime(.0001, t);
+      g.gain.exponentialRampToValueAtTime(.3, t + .01);
+      g.gain.exponentialRampToValueAtTime(.0001, t + (i === 3 ? 1 : .25));
+      o.connect(g).connect(this.master);
+      o.start(t); o.stop(t + 1.1);
+    });
+  },
+  tick() { this.plop(3.2, .05); },
+};
+
+/* =====================================================================
+   THREE — scène
+   ===================================================================== */
+const canvas = $('#gl');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+} catch (e) {
+  $('#nogl').style.display = 'grid';
+  $('#intro').remove();
+  throw e;
+}
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+renderer.toneMapping = THREE.NeutralToneMapping;
+renderer.toneMappingExposure = 1.05;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(36, innerWidth / innerHeight, .1, 100);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), .04).texture;
+scene.environmentIntensity = .85;
+const keyLight = new THREE.DirectionalLight(0xfff0dc, 1.7);
+keyLight.position.set(3, 6, 4);
+scene.add(keyLight, new THREE.HemisphereLight(0xfff6ea, 0x8a5a3a, .55));
+
+const bowlGroup = new THREE.Group();
+scene.add(bowlGroup);
+
+/* ---------- le bol (lathe d'une super-ellipse) ---------- */
+const TOP = 1.25, A = 1.55, B = 1.0, TH = .1, NEXP = 2.6, SOUP_Y = .98;
+const supPt = (t, a, b) => {
+  const th = t * Math.PI / 2;
+  return new THREE.Vector2(Math.max(1e-4, a * Math.pow(Math.cos(th), 2 / NEXP)), TOP - b * Math.pow(Math.sin(th), 2 / NEXP));
+};
+const SOUP_R = (() => {
+  const s = Math.pow((TOP - SOUP_Y) / B, NEXP / 2);
+  return A * Math.pow(Math.cos(Math.asin(s)), 2 / NEXP) + .015;
+})();
+
+const innerPts = [];
+for (let i = 48; i >= 0; i--) innerPts.push(supPt(i / 48, A, B));
+const rimC = A + TH / 2, rr = TH / 2;
+for (let i = 1; i <= 6; i++) { const ph = Math.PI - (i / 12) * Math.PI; innerPts.push(new THREE.Vector2(rimC + rr * Math.cos(ph), TOP + rr * Math.sin(ph))); }
+const outerPts = [];
+for (let i = 6; i <= 12; i++) { const ph = Math.PI - (i / 12) * Math.PI; outerPts.push(new THREE.Vector2(rimC + rr * Math.cos(ph), TOP + rr * Math.sin(ph))); }
+for (let i = 1; i <= 48; i++) { const p = supPt(i / 48, A + TH, B + TH * 1.3); if (p.x < .86) break; outerPts.push(p); }
+outerPts.push(new THREE.Vector2(.86, .05), new THREE.Vector2(.83, 0), new THREE.Vector2(.7, 0), new THREE.Vector2(.66, .05), new THREE.Vector2(1e-4, .06));
+
+function speckleTex() {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#f6efe3'; g.fillRect(0, 0, 512, 256);
+  for (let i = 0; i < 1500; i++) {
+    g.fillStyle = `rgba(${rand(60, 120) | 0},${rand(35, 70) | 0},${rand(15, 40) | 0},${rand(.12, .5)})`;
+    g.beginPath(); g.arc(rand(512), rand(256), rand(.5, 2), 0, TAU); g.fill();
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(3, 1);
+  return t;
+}
+const innerMat = new THREE.MeshPhysicalMaterial({ map: speckleTex(), roughness: .38, clearcoat: .8, clearcoatRoughness: .12, side: THREE.DoubleSide });
+const glazeMat = new THREE.MeshPhysicalMaterial({ color: SOUPS[0].gl.glaze, roughness: .28, clearcoat: 1, clearcoatRoughness: .06, side: THREE.DoubleSide });
+bowlGroup.add(new THREE.Mesh(new THREE.LatheGeometry(innerPts, 96), innerMat));
+bowlGroup.add(new THREE.Mesh(new THREE.LatheGeometry(outerPts, 96), glazeMat));
+
+/* ---------- ombre de contact ---------- */
+const shadowTex = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gr.addColorStop(0, 'rgba(50,20,0,.55)'); gr.addColorStop(.45, 'rgba(50,20,0,.28)'); gr.addColorStop(1, 'rgba(50,20,0,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+  return new THREE.CanvasTexture(c);
+})();
+const shadow = new THREE.Mesh(new THREE.PlaneGeometry(5.4, 5.4), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false, toneMapped: false }));
+shadow.rotation.x = -Math.PI / 2; shadow.position.y = -.02;
+scene.add(shadow);
+
+/* ---------- la soupe (shader : vagues, ondes, tourbillon, crème, huile) ---------- */
+const RIPPLE_N = 16;
+const ripples = Array.from({ length: RIPPLE_N }, () => new THREE.Vector4(0, 0, -100, 0));
+let rippleIdx = 0;
+const soupU = {
+  uTime: { value: 0 }, uRipples: { value: ripples }, uSwirl: { value: 0 }, uRadius: { value: SOUP_R }, uSpin: { value: 0 }, uTwist: { value: 0 },
+  uColor: { value: new THREE.Color(SOUPS[0].gl.color) }, uCream: { value: new THREE.Color(SOUPS[0].gl.cream) },
+  uOil: { value: new THREE.Color(SOUPS[0].gl.oil) }, uSpeck: { value: new THREE.Color(SOUPS[0].gl.speck) },
+  uCreamAmt: { value: SOUPS[0].gl.creamAmt }, uOilAmt: { value: SOUPS[0].gl.oilAmt }, uSpeckAmt: { value: SOUPS[0].gl.speckAmt },
+  uPourCol: { value: new THREE.Color('#fff') }, uPourPos: { value: new THREE.Vector2() }, uPourAmt: { value: 0 }, uPourR: { value: .1 },
+};
+const soupGeo = new THREE.RingGeometry(1e-4, SOUP_R, 128, 56);
+soupGeo.rotateX(-Math.PI / 2);
+const soupMat = new THREE.ShaderMaterial({
+  uniforms: soupU,
+  vertexShader: /* glsl */`
+    uniform float uTime; uniform vec4 uRipples[${RIPPLE_N}]; uniform float uSwirl; uniform float uRadius;
+    varying vec3 vWorld; varying vec3 vN; varying vec2 vP;
+    float height(vec2 p){
+      float r = length(p), t = uTime;
+      float v = .010*sin(p.x*3.1 + t*1.2)*cos(p.y*2.7 - t*.9) + .006*sin(r*7. - t*1.7);
+      v -= uSwirl*.16*exp(-r*r*1.6);
+      for (int i = 0; i < ${RIPPLE_N}; i++) {
+        vec4 rp = uRipples[i];
+        float age = t - rp.z;
+        if (age < 0. || age > 3.5) continue;
+        float d = distance(p, rp.xy);
+        float k = d - age*1.5;
+        v -= rp.w*.07*cos(k*13.)*exp(-k*k*6.)*exp(-age*1.4)/(1. + d*3.);
+      }
+      return v*(1. - smoothstep(uRadius*.9, uRadius, r));
+    }
+    void main(){
+      vec2 p = position.xz; float e = .03;
+      float h = height(p);
+      float hx = height(p + vec2(e, 0.)) - height(p - vec2(e, 0.));
+      float hz = height(p + vec2(0., e)) - height(p - vec2(0., e));
+      vN = normalize(mat3(modelMatrix)*normalize(vec3(-hx/(2.*e), 1., -hz/(2.*e))));
+      vec4 w = modelMatrix*vec4(position.x, position.y + h, position.z, 1.);
+      vWorld = w.xyz; vP = p;
+      gl_Position = projectionMatrix*viewMatrix*w;
+    }`,
+  fragmentShader: /* glsl */`
+    uniform float uTime, uRadius, uSpin, uTwist, uCreamAmt, uOilAmt, uSpeckAmt, uPourAmt, uPourR;
+    uniform vec3 uColor, uCream, uOil, uSpeck, uPourCol; uniform vec2 uPourPos;
+    varying vec3 vWorld; varying vec3 vN; varying vec2 vP;
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7)))*43758.5453); }
+    float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3. - 2.*f);
+      return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }
+    float fbm(vec2 p){ float v = 0., a = .5; for (int i = 0; i < 4; i++){ v += a*noise(p); p *= 2.03; a *= .5; } return v; }
+    float cells(vec2 p){ vec2 i = floor(p), f = fract(p); float md = 9.;
+      for (int y = -1; y <= 1; y++) for (int x = -1; x <= 1; x++){
+        vec2 g = vec2(x, y); vec2 o = vec2(hash(i + g), hash(i + g + 17.3));
+        md = min(md, length(g + o - f)/(.25 + .7*hash(i + g + 5.1)));
+      } return md; }
+    void main(){
+      vec2 p = vP; float r = length(p)/uRadius;
+      float ang = uSpin + uTwist*(1. - r);
+      vec2 q = mat2(cos(ang), -sin(ang), sin(ang), cos(ang))*p;
+      float n = fbm(q*1.6 + 3.);
+      vec3 col = uColor*(.84 + .3*n);
+      float a = atan(q.y, q.x);
+      float sp = sin(a + r*10. + n*2.6);
+      float cream = smoothstep(.55, .92, sp)*smoothstep(.95, .25, r)*smoothstep(.0, .12, r);
+      cream = max(cream, smoothstep(.17, .05, r + (n - .5)*.1));
+      col = mix(col, uCream, cream*uCreamAmt);
+      float oil = (1. - smoothstep(.26, .33, cells(q*4.2 + 2.)))*uOilAmt*smoothstep(1., .75, r);
+      col = mix(col, uOil, oil*.85);
+      float sk = (1. - smoothstep(.07, .11, cells(q*13. + 9.)))*uSpeckAmt;
+      col = mix(col, uSpeck, sk);
+      float pd = length(p - uPourPos) + (n - .5)*.35;
+      col = mix(col, uPourCol, uPourAmt*smoothstep(uPourR, uPourR*.25, pd));
+      col *= mix(1., .7, smoothstep(.8, 1., r));
+      vec3 N = normalize(vN), V = normalize(cameraPosition - vWorld), L = normalize(vec3(.45, 1., .35));
+      float diff = .62 + .38*max(dot(N, L), 0.);
+      float spec = pow(max(dot(N, normalize(L + V)), 0.), 90.)*(.5 + oil*.8);
+      float fres = pow(1. - max(dot(N, V), 0.), 4.);
+      gl_FragColor = vec4(col*diff + vec3(1., .97, .9)*spec + vec3(1., .95, .88)*fres*.22, 1.);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+    }`,
+});
+const soup = new THREE.Mesh(soupGeo, soupMat);
+soup.position.y = SOUP_Y;
+bowlGroup.add(soup);
+
+/* ---------- vapeur ---------- */
+const STEAM_N = reduced ? 22 : 56;
+const steamGeo = new THREE.BufferGeometry();
+{
+  const seeds = new Float32Array(STEAM_N * 4), sizes = new Float32Array(STEAM_N);
+  for (let i = 0; i < STEAM_N; i++) {
+    const a = rand(TAU), r = Math.sqrt(Math.random()) * 1.05;
+    seeds.set([Math.cos(a) * r, Math.sin(a) * r, rand(.11, .2), Math.random()], i * 4);
+    sizes[i] = rand(.55, 1.25);
+  }
+  steamGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(STEAM_N * 3), 3));
+  steamGeo.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 4));
+  steamGeo.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
+}
+const steamMat = new THREE.ShaderMaterial({
+  uniforms: { uTime: { value: 0 }, uScale: { value: 1000 }, uIntensity: { value: 1 } },
+  vertexShader: /* glsl */`
+    uniform float uTime, uScale; attribute vec4 aSeed; attribute float aSize; varying float vA;
+    void main(){
+      float life = fract(uTime*aSeed.z + aSeed.w);
+      vec3 p = vec3(aSeed.x, 0., aSeed.y);
+      p.xz *= 1. + life*.5;
+      p.y = .05 + life*2.5;
+      p.x += sin(uTime*.9 + aSeed.w*12. + life*5.)*.3*life;
+      p.z += cos(uTime*.7 + aSeed.w*9.)*.2*life;
+      vA = smoothstep(0., .2, life)*(1. - smoothstep(.4, 1., life));
+      vec4 mv = modelViewMatrix*vec4(p, 1.);
+      gl_PointSize = aSize*(.6 + life*1.6)*uScale/(-mv.z);
+      gl_Position = projectionMatrix*mv;
+    }`,
+  fragmentShader: /* glsl */`
+    uniform float uIntensity; varying float vA;
+    void main(){
+      float d = length(gl_PointCoord - .5);
+      float a = smoothstep(.5, 0., d); a *= a;
+      gl_FragColor = vec4(1., .985, .96, a*vA*uIntensity*.17);
+    }`,
+  transparent: true, depthWrite: false,
+});
+const steam = new THREE.Points(steamGeo, steamMat);
+steam.position.y = SOUP_Y; steam.frustumCulled = false; steam.renderOrder = 10;
+bowlGroup.add(steam);
+
+/* ---------- gouttelettes (éclaboussures + liquides versés) ---------- */
+const DROP_N = 260;
+const dropMesh = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 10, 8), new THREE.MeshStandardMaterial({ roughness: .18 }), DROP_N);
+dropMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+dropMesh.frustumCulled = false;
+const drops = Array.from({ length: DROP_N }, () => ({ on: false, p: new THREE.Vector3(), v: new THREE.Vector3(), s: 0, kind: 0 }));
+const dummy = new THREE.Object3D();
+dummy.scale.setScalar(0); dummy.updateMatrix();
+for (let i = 0; i < DROP_N; i++) { dropMesh.setMatrixAt(i, dummy.matrix); dropMesh.setColorAt(i, new THREE.Color(1, 1, 1)); }
+bowlGroup.add(dropMesh);
+let dropPtr = 0;
+function emitDrop(p, v, s, color, kind = 0) {
+  const i = dropPtr; dropPtr = (dropPtr + 1) % DROP_N;
+  const d = drops[i];
+  d.on = true; d.p.copy(p); d.v.copy(v); d.s = s; d.kind = kind;
+  dropMesh.setColorAt(i, color);
+  dropMesh.instanceColor.needsUpdate = true;
+}
+
+/* ---------- bulles qui frémissent ---------- */
+const bubbleMat = new THREE.MeshPhysicalMaterial({ color: SOUPS[0].gl.color, roughness: .06, clearcoat: 1, transparent: true, opacity: .92 });
+const bubbleGeo = new THREE.SphereGeometry(1, 16, 10);
+const bubbles = Array.from({ length: 9 }, () => {
+  const m = new THREE.Mesh(bubbleGeo, bubbleMat); m.scale.setScalar(0); bowlGroup.add(m);
+  return { m, t: 0, life: 1, s: 0, on: false };
+});
+let nextBubble = 1;
+
+/* ---------- la cuillère en bois ---------- */
+const wood = new THREE.MeshStandardMaterial({ color: '#c4935e', roughness: .55 });
+const spoon = new THREE.Group();
+{
+  const handle = new THREE.Mesh(new THREE.CylinderGeometry(.045, .06, 2.4, 14), wood);
+  handle.position.y = 1.25;
+  const head = new THREE.Mesh(new THREE.SphereGeometry(.26, 20, 14), wood);
+  head.scale.set(.85, .32, 1.15);
+  spoon.add(handle, head);
+}
+spoon.scale.setScalar(0);
+spoon.rotation.order = 'YXZ';
+bowlGroup.add(spoon);
+
+/* ---------- ingrédients 3D ---------- */
+const mat = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: .5, ...o });
+const RB = (x, y, z, r) => new RoundedBoxGeometry(x, y, z, 3, r);
+function mk(geo, m, { s = [1, 1, 1], r = [0, 0, 0], p = [0, 0, 0] } = {}) {
+  const mesh = new THREE.Mesh(geo, m);
+  mesh.scale.set(...s); mesh.rotation.set(...r); mesh.position.set(...p);
+  return mesh;
+}
+const grp = (...children) => { const g = new THREE.Group(); g.add(...children); return g; };
+const flat = [Math.PI / 2, 0, 0];
+const slice = (r, h, side, face) => {
+  const g = new THREE.CylinderGeometry(r, r, h, 24);
+  return mk(g, [mat(side), mat(face, { roughness: .4 }), mat(face, { roughness: .4 })]);
+};
+const leaf = (r, c, s = [1, .1, .6]) => mk(new THREE.SphereGeometry(r, 14, 8), mat(c, { roughness: .4 }), { s });
+const PROTOS = {
+  pumpkin: grp(mk(RB(.24, .22, .24, .05), mat('#f2862a', { roughness: .45 }))),
+  chestnut: grp(mk(new THREE.SphereGeometry(.12, 16, 12), mat('#74401f', { roughness: .4 }), { s: [1, .8, 1.15] })),
+  onion: grp(mk(new THREE.TorusGeometry(.13, .024, 8, 28), mat('#f4e7c3', { roughness: .25 }), { r: flat })),
+  seed: grp(mk(new THREE.SphereGeometry(.07, 12, 8), mat('#7a9a3e'), { s: [1, .3, .6] })),
+  butter: grp(mk(RB(.2, .12, .14, .03), mat('#f7df82', { roughness: .3 }))),
+  speck: grp(mk(new THREE.SphereGeometry(.026, 6, 4), mat('#3a2a1e'))),
+  crouton: grp(mk(RB(.24, .14, .24, .04), mat('#d79a45', { roughness: .85 }))),
+  cheese: grp(mk(RB(.32, .05, .07, .02), mat('#f5d46b', { roughness: .35 }))),
+  thyme: grp(
+    mk(new THREE.CylinderGeometry(.008, .008, .32, 5), mat('#6b5a2e'), { r: [0, 0, Math.PI / 2] }),
+    ...[-.12, -.07, -.02, .03, .08, .12].map((x, i) => leaf(.035, '#5b7a3a', [1, .35, .6]).translateX(x).translateZ(i % 2 ? .025 : -.025)),
+  ),
+  bay: grp(leaf(.17, '#5d7d3a', [1, .07, .42])),
+  carrot: grp(slice(.12, .045, '#e2650e', '#f58a2a')),
+  celery: grp(mk(new THREE.TorusGeometry(.1, .035, 6, 14, Math.PI * 1.1), mat('#a3c86e'), { r: flat })),
+  garlic: grp(mk(new THREE.SphereGeometry(.08, 12, 10), mat('#f6efe0', { roughness: .35 }), { s: [1, .7, .8] })),
+  zucchini: grp(slice(.13, .05, '#3f7a2a', '#e4ecb8')),
+  lime: grp(slice(.15, .04, '#5e9a2a', '#c8e27a')),
+  lemon: grp(slice(.15, .04, '#e8c51c', '#f8ec96')),
+  tomato: grp(mk(RB(.18, .16, .18, .04), mat('#d8402a', { roughness: .3 }))),
+  bean: grp(mk(new THREE.SphereGeometry(.075, 14, 10), mat('#f2ead6', { roughness: .45 }), { s: [1.5, .75, .9] })),
+  pasta: grp(mk(new THREE.TorusGeometry(.065, .035, 8, 16), mat('#f2cf72', { roughness: .45 }), { r: flat })),
+  basil: grp(leaf(.15, '#2f7d32')),
+  coriander: grp(leaf(.1, '#4a9a3a', [1, .1, .8]), leaf(.08, '#4a9a3a', [1, .1, .8]).translateX(.11).translateZ(.04)),
+  chicken: grp(mk(RB(.28, .07, .13, .03), mat('#f1e0c6', { roughness: .6 }))),
+  lemongrass: grp(mk(new THREE.CylinderGeometry(.035, .035, .32, 10), mat('#d8e3a0'), { r: [0, 0, Math.PI / 2] })),
+  ginger: grp(mk(RB(.13, .05, .1, .02), mat('#e6c47c'))),
+  mushroom: grp(
+    mk(new THREE.SphereGeometry(.13, 18, 8, 0, TAU, 0, Math.PI / 2), mat('#d9c8ae', { roughness: .6 }), { s: [1, .7, 1] }),
+    mk(new THREE.CircleGeometry(.13, 18), mat('#8a6b4e', { side: THREE.DoubleSide }), { r: [Math.PI / 2, 0, 0] }),
+    mk(new THREE.CylinderGeometry(.04, .05, .1, 10), mat('#f2eadc'), { p: [0, -.05, 0] }),
+  ),
+  chili: grp(mk(new THREE.TorusGeometry(.06, .024, 8, 16), mat('#d9261c', { roughness: .25 }), { r: flat })),
+  lentil: grp(mk(new THREE.CylinderGeometry(.05, .05, .024, 12), mat('#f0883a', { roughness: .45 }))),
+  leek: grp(mk(new THREE.TorusGeometry(.12, .03, 8, 24), mat('#d8e8a8', { roughness: .3 }), { r: flat })),
+  potato: grp(mk(RB(.2, .2, .2, .05), mat('#f1d785', { roughness: .55 }))),
+  chive: grp(mk(new THREE.CylinderGeometry(.013, .013, .2, 6), mat('#3b8a2c'), { r: [0, 0, Math.PI / 2] })),
+};
+const SIZE = { lentil: .055, speck: .03, chive: .07, seed: .08, chili: .08, pasta: .09, garlic: .09 };
+const COUNT = { lentil: 14, speck: 14, chive: 6, cheese: 6, onion: 4, seed: 5, crouton: 3, chili: 4 };
+
+const items = [];
+const MAX_ITEMS = 56;
+function spawnOne(key, at) {
+  const proto = PROTOS[key] || PROTOS.basil;
+  const o = proto.clone();
+  const lim = SOUP_R - .35;
+  let x, z;
+  if (at) {
+    x = at.x + rand(-.12, .12); z = at.z + rand(-.12, .12);
+    const r = Math.hypot(x, z);
+    if (r > lim) { x *= lim / r; z *= lim / r; }
+  } else {
+    const a = rand(TAU), r = Math.sqrt(Math.random()) * lim;
+    x = Math.cos(a) * r; z = Math.sin(a) * r;
+  }
+  o.position.set(x, SOUP_Y + rand(2.3, 3.1), z);
+  o.rotation.set(rand(TAU), rand(TAU), rand(TAU));
+  bowlGroup.add(o);
+  const size = SIZE[key] ?? .13;
+  items.push({
+    o, size, state: 0, vy: rand(-.6, 0), phase: rand(10), dip: 0,
+    spin: new THREE.Vector3(rand(-6, 6), rand(-6, 6), rand(-6, 6)),
+    rest: new THREE.Vector3(rand(-.25, .25), 0, rand(-.25, .25)),
+  });
+  const alive = items.filter((it) => it.state < 2);
+  if (alive.length > MAX_ITEMS) alive[0].state = 2;
+}
+const timers = new Set();
+const later = (fn, ms) => { const id = setTimeout(() => { timers.delete(id); fn(); }, ms); timers.add(id); return id; };
+function spawn(key, at) {
+  if (key.startsWith('pour:')) return pour(key.slice(5));
+  const k = key === 'spice' ? 'speck' : key;
+  const n = COUNT[k] ?? 3;
+  for (let i = 0; i < n; i++) later(() => spawnOne(k, at), i * (k === 'speck' || k === 'lentil' ? 35 : 95));
+}
+
+/* ---------- liquides versés ---------- */
+const pours = [];
+function pour(hex) {
+  const col = new THREE.Color(hex);
+  const x = rand(-.45, .45), z = rand(-.35, .35);
+  pours.push({ x, z, col, t: 0, dur: .9 });
+  Sound.pour();
+  soupU.uPourPos.value.set(x, z);
+  soupU.uPourCol.value.copy(col);
+  gsap.killTweensOf(soupU.uPourAmt); gsap.killTweensOf(soupU.uPourR);
+  gsap.timeline()
+    .set(soupU.uPourAmt, { value: 0 })
+    .to(soupU.uPourAmt, { value: .85, duration: .8, ease: 'power2.out', delay: .5 })
+    .to(soupU.uPourAmt, { value: 0, duration: 2.6, ease: 'power1.inOut', delay: .3 });
+  gsap.fromTo(soupU.uPourR, { value: .08 }, { value: .95, duration: 3.6, ease: 'power2.out', delay: .5 });
+}
+
+/* ---------- ondes ---------- */
+let elapsed = 0;
+function addRipple(x, z, s) {
+  ripples[rippleIdx].set(x, z, elapsed, s);
+  rippleIdx = (rippleIdx + 1) % RIPPLE_N;
+}
+const tmpV = new THREE.Vector3(), tmpV2 = new THREE.Vector3(), tmpC = new THREE.Color(), WHITE = new THREE.Color(1, 1, 1);
+function splash(x, z, n, strength) {
+  tmpC.copy(soupU.uColor.value).lerp(WHITE, .12);
+  for (let i = 0; i < n; i++) {
+    const a = rand(TAU), sp = rand(.25, .85) * strength;
+    tmpV.set(x, SOUP_Y + .02, z);
+    tmpV2.set(Math.cos(a) * sp, rand(1.1, 2.3) * strength, Math.sin(a) * sp);
+    emitDrop(tmpV, tmpV2, rand(.018, .038), tmpC, 0);
+  }
+}
+
+/* =====================================================================
+   CAMÉRA & CADRAGE
+   ===================================================================== */
+const view = { x: 0, y: .14, zoom: 1 };
+const camBase = new THREE.Vector3();
+const target = new THREE.Vector3(0, .78, 0);
+const camDir = new THREE.Vector3(0, Math.sin(THREE.MathUtils.degToRad(38)), Math.cos(THREE.MathUtils.degToRad(38)));
+function frame() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.fov = camera.aspect < 1 ? 42 : 34;
+  const vf = THREE.MathUtils.degToRad(camera.fov);
+  const tv = Math.tan(vf / 2), th = tv * camera.aspect;
+  const dW = (3.5 / .86) / (2 * th);
+  const dH = (2.7 / .44) / (2 * tv);
+  camBase.copy(target).addScaledVector(camDir, Math.max(dW, dH));
+  camera.position.copy(camBase);
+}
+frame();
+addEventListener('resize', () => { frame(); layoutCards(); });
+
+/* parallaxe : souris ou gyroscope */
+const par = { x: 0, y: 0, tx: 0, ty: 0 };
+addEventListener('pointermove', (e) => {
+  if (e.pointerType !== 'mouse') return;
+  par.tx = (e.clientX / innerWidth - .5) * 2; par.ty = (e.clientY / innerHeight - .5) * 2;
+});
+let gyroAsked = false;
+function askGyro() {
+  if (gyroAsked) return; gyroAsked = true;
+  const DOE = window.DeviceOrientationEvent;
+  if (DOE && typeof DOE.requestPermission === 'function') DOE.requestPermission().catch(() => {});
+}
+addEventListener('deviceorientation', (e) => {
+  if (e.gamma == null) return;
+  par.tx = clamp(e.gamma / 25, -1, 1); par.ty = clamp((e.beta - 50) / 30, -1, 1);
+});
+
+/* =====================================================================
+   TOUILLER / TAPER
+   ===================================================================== */
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hit = new THREE.Vector3();
+function soupPoint(e) {
+  ndc.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  bowlGroup.updateMatrixWorld();
+  plane.constant = -(bowlGroup.position.y + SOUP_Y);
+  if (!ray.ray.intersectPlane(plane, hit)) return null;
+  return bowlGroup.worldToLocal(hit.clone());
+}
+let swirl = 0, vortex = 0;
+const stir = { on: false, x: 0, y: 0, t: 0, moved: false, lastA: null, lastR: null, inside: false };
+const spoonTarget = new THREE.Vector3(0, SOUP_Y - .03, 0);
+let spoonShown = false;
+function showSpoon(v) {
+  if (v === spoonShown) return; spoonShown = v;
+  gsap.to(spoon.scale, { x: v ? 1 : 0, y: v ? 1 : 0, z: v ? 1 : 0, duration: v ? .45 : .3, ease: v ? 'back.out(2)' : 'power2.in' });
+}
+canvas.addEventListener('pointerdown', (e) => {
+  Sound.init(); askGyro();
+  if (sheetOpen) return;
+  stir.on = true; stir.x = e.clientX; stir.y = e.clientY; stir.t = performance.now(); stir.moved = false; stir.lastA = null; stir.lastR = null;
+  try { canvas.setPointerCapture(e.pointerId); } catch {}
+  const p = soupPoint(e);
+  if (p && Math.hypot(p.x, p.z) < SOUP_R + .2) {
+    stir.inside = true;
+    spoonTarget.set(p.x, SOUP_Y - .03, p.z);
+    spoon.position.copy(spoonTarget);
+  } else stir.inside = false;
+});
+canvas.addEventListener('pointermove', (e) => {
+  if (!stir.on) return;
+  if (Math.hypot(e.clientX - stir.x, e.clientY - stir.y) > 9) stir.moved = true;
+  if (!stir.moved) return;
+  const p = soupPoint(e);
+  if (!p) return;
+  const r = Math.hypot(p.x, p.z), lim = SOUP_R - .3;
+  if (r > SOUP_R + .6) return;
+  if (r > lim) { p.x *= lim / r; p.z *= lim / r; }
+  showSpoon(true); hideHint();
+  spoonTarget.set(p.x, SOUP_Y - .03, p.z);
+  const a = Math.atan2(p.z, p.x);
+  if (stir.lastA != null) {
+    let dA = a - stir.lastA;
+    if (dA > Math.PI) dA -= TAU; if (dA < -Math.PI) dA += TAU;
+    swirl = clamp(swirl + dA * 2.4, -5, 5);
+  }
+  stir.lastA = a;
+  if (!stir.lastR || Math.hypot(p.x - stir.lastR.x, p.z - stir.lastR.z) > .2) {
+    addRipple(p.x, p.z, .4);
+    stir.lastR = { x: p.x, z: p.z };
+  }
+});
+function endStir(e) {
+  if (!stir.on) return;
+  stir.on = false; showSpoon(false);
+  if (!stir.moved && performance.now() - stir.t < 400) {
+    const p = soupPoint(e);
+    const inside = p && Math.hypot(p.x, p.z) < SOUP_R;
+    spawnOne(pick(SOUPS[cur].rain), inside ? { x: p.x, z: p.z } : null);
+    hideHint();
+  }
+}
+canvas.addEventListener('pointerup', endStir);
+canvas.addEventListener('pointercancel', endStir);
+
+/* =====================================================================
+   BOUCLE
+   ===================================================================== */
+const clock = new THREE.Clock();
+let lastFrameTime = 0;
+function loop() {
+  const dt = Math.min(clock.getDelta(), .05);
+  elapsed += dt;
+  const t = elapsed;
+
+  // tourbillon
+  swirl *= Math.exp(-dt * .7);
+  vortex += (Math.min(Math.abs(swirl) / 4, 1) - vortex) * Math.min(1, dt * 3);
+  soupU.uTime.value = t;
+  soupU.uSwirl.value = vortex;
+  soupU.uSpin.value += (.06 + swirl * .85) * dt;
+  soupU.uTwist.value += (swirl * .7 - soupU.uTwist.value) * Math.min(1, dt * 1.5);
+  steamMat.uniforms.uTime.value = t;
+
+  // ingrédients
+  const floating = [];
+  for (let i = items.length - 1; i >= 0; i--) {
+    const it = items[i], o = it.o;
+    if (it.state === 0) {
+      it.vy -= 7 * dt;
+      o.position.y += it.vy * dt;
+      o.rotation.x += it.spin.x * dt; o.rotation.y += it.spin.y * dt; o.rotation.z += it.spin.z * dt;
+      if (o.position.y <= SOUP_Y) {
+        it.state = 1;
+        const s = clamp(-it.vy / 5, .3, 1);
+        it.dip = Math.min(.16, -it.vy * .03);
+        addRipple(o.position.x, o.position.z, s * (it.size > .1 ? 1 : .55));
+        splash(o.position.x, o.position.z, Math.round(4 + it.size * 40), it.size > .1 ? 1 : .7);
+        Sound.plop(clamp(1.6 - it.size * 4, .9, 2.4) * rand(.92, 1.08), it.size > .1 ? .22 : .1);
+        o.rotation.x %= TAU; o.rotation.z %= TAU;
+      }
+      continue;
+    }
+    // flotte en orbite avec le tourbillon
+    let x = o.position.x, z = o.position.z;
+    let r = Math.hypot(x, z), a = Math.atan2(z, x);
+    const w = .07 + swirl * (1.15 - .55 * r / SOUP_R);
+    a += w * dt;
+    r += Math.sin(t * .4 + it.phase) * .03 * dt;
+    r = clamp(r, .08, SOUP_R - it.size - .14);
+    o.position.x = Math.cos(a) * r; o.position.z = Math.sin(a) * r;
+    it.dip *= Math.exp(-dt * 2.6);
+    o.rotation.y += w * dt;
+    if (it.state === 1) {
+      o.position.y = SOUP_Y - .02 + Math.sin(t * 2.1 + it.phase) * .012 - it.dip - vortex * .16 * Math.exp(-r * r * 1.6);
+      const k = Math.min(1, dt * 2.5);
+      o.rotation.x += (it.rest.x - o.rotation.x) * k;
+      o.rotation.z += (it.rest.z - o.rotation.z) * k;
+      floating.push(it);
+    } else {
+      o.position.y -= dt * .3;
+      o.scale.multiplyScalar(1 - dt * 1.3);
+      if (o.scale.x < .05) { bowlGroup.remove(o); items.splice(i, 1); }
+    }
+  }
+  // les ingrédients se poussent un peu
+  for (let i = 0; i < floating.length; i++) {
+    const a = floating[i].o.position;
+    for (let j = i + 1; j < floating.length; j++) {
+      const b = floating[j].o.position;
+      const dx = b.x - a.x, dz = b.z - a.z, min = (floating[i].size + floating[j].size) * .85;
+      const d2 = dx * dx + dz * dz;
+      if (d2 < min * min && d2 > 1e-6) {
+        const d = Math.sqrt(d2), push = (min - d) * .5 * Math.min(1, dt * 8) / d;
+        a.x -= dx * push; a.z -= dz * push; b.x += dx * push; b.z += dz * push;
+      }
+    }
+  }
+
+  // liquides qui coulent
+  for (let i = pours.length - 1; i >= 0; i--) {
+    const p = pours[i];
+    p.t += dt;
+    if (p.t > p.dur) { pours.splice(i, 1); continue; }
+    for (let k = 0; k < 3; k++) {
+      tmpV.set(p.x + rand(-.05, .05), SOUP_Y + 2.5, p.z + rand(-.05, .05));
+      tmpV2.set(rand(-.08, .08), -2.6, rand(-.08, .08));
+      emitDrop(tmpV, tmpV2, rand(.028, .048), p.col, 1);
+    }
+  }
+
+  // gouttes
+  for (let i = 0; i < DROP_N; i++) {
+    const d = drops[i];
+    if (!d.on) continue;
+    d.v.y -= 9 * dt;
+    d.p.addScaledVector(d.v, dt);
+    if (d.v.y < 0 && d.p.y < SOUP_Y) {
+      d.on = false;
+      if (d.kind === 1 && Math.random() < .3) addRipple(d.p.x, d.p.z, .22);
+      dummy.scale.setScalar(0);
+    } else {
+      dummy.position.copy(d.p);
+      const st = d.kind === 1 ? 1.8 : 1 + Math.min(.6, Math.abs(d.v.y) * .12);
+      dummy.scale.set(d.s, d.s * st, d.s);
+    }
+    dummy.updateMatrix();
+    dropMesh.setMatrixAt(i, dummy.matrix);
+  }
+  dropMesh.instanceMatrix.needsUpdate = true;
+
+  // bulles
+  if (t > nextBubble) {
+    nextBubble = t + rand(.25, .9);
+    const b = bubbles.find((b) => !b.on);
+    if (b) {
+      const a = rand(TAU), r = Math.sqrt(Math.random()) * (SOUP_R - .3);
+      Object.assign(b, { on: true, t: 0, life: rand(.5, 1.1), s: rand(.025, .06) });
+      b.m.position.set(Math.cos(a) * r, SOUP_Y, Math.sin(a) * r);
+    }
+  }
+  for (const b of bubbles) {
+    if (!b.on) continue;
+    b.t += dt;
+    const k = b.t / b.life;
+    if (k >= 1) {
+      b.on = false; b.m.scale.setScalar(0);
+      addRipple(b.m.position.x, b.m.position.z, .16);
+      Sound.plop(rand(2, 3), .025);
+    } else {
+      b.m.scale.setScalar(b.s * Math.min(1, k * 1.5));
+      b.m.position.y = SOUP_Y - b.s * .35;
+    }
+  }
+
+  // cuillère
+  spoon.position.lerp(spoonTarget, Math.min(1, dt * 14));
+  spoon.rotation.y = 0;
+  spoon.rotation.x = .38 + par.y * .05;
+  spoon.rotation.z = -spoon.position.x * .22;
+
+  // ombre qui suit le bol
+  const hgt = bowlGroup.position.y;
+  shadow.scale.setScalar(1 / (1 + Math.max(0, hgt) * .25));
+  shadow.material.opacity = clamp(1 - hgt * .25, .2, 1);
+  shadow.position.x = bowlGroup.position.x;
+
+  // caméra
+  par.x += (par.tx - par.x) * Math.min(1, dt * 3);
+  par.y += (par.ty - par.y) * Math.min(1, dt * 3);
+  camera.position.copy(camBase);
+  const dist = camBase.distanceTo(target);
+  camera.position.x += par.x * dist * .06 + Math.sin(t * .25) * dist * .012;
+  camera.position.y += -par.y * dist * .035;
+  camera.lookAt(target);
+  camera.zoom = view.zoom;
+  camera.setViewOffset(innerWidth, innerHeight, view.x * innerWidth, view.y * innerHeight, innerWidth, innerHeight);
+  camera.updateProjectionMatrix();
+  steamMat.uniforms.uScale.value = (innerHeight * renderer.getPixelRatio()) / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2)) * view.zoom;
+
+  renderer.render(scene, camera);
+  lastFrameTime = t;
+}
+
+/* =====================================================================
+   UI — cartes
+   ===================================================================== */
+const cardsEl = $('#cards'), dotsEl = $('#dots');
+cardsEl.innerHTML = SOUPS.map((s, i) => `
+  <article class="card" data-i="${i}" style="--c:${s.gl.color}">
+    <span class="blob"></span>
+    <span class="emo">${s.emo.map((e, k) => `<span style="--d:${k * .6}">${e}</span>`).join('')}</span>
+    <div class="num">N° 0${i + 1} — ${s.season}</div>
+    <h2>${s.name}</h2>
+    <p class="sub">${s.sub}</p>
+    <div class="chips"><span>⏱ ${s.time} min</span><span>${s.level}</span><span>${s.serves} pers.</span></div>
+    <button class="open" data-i="${i}">Ouvrir la recette <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </article>`).join('');
+dotsEl.innerHTML = SOUPS.map(() => '<i></i>').join('');
+const cardEls = $$('.card', cardsEl), dotEls = $$('i', dotsEl);
+let shown = 0, cur = -1, scrollRaf = 0, settleT = 0;
+function layoutCards() {
+  const c = cardsEl.scrollLeft + cardsEl.clientWidth / 2;
+  let best = 0, bd = 1e9;
+  cardEls.forEach((el, i) => {
+    const off = (el.offsetLeft + el.offsetWidth / 2 - c) / el.offsetWidth;
+    const a = Math.min(Math.abs(off), 1.5);
+    el.style.transform = `translateY(${a * 18}px) rotate(${off * 5}deg) scale(${1 - a * .08})`;
+    el.style.opacity = 1 - a * .3;
+    if (Math.abs(off) < bd) { bd = Math.abs(off); best = i; }
+  });
+  if (best !== shown) {
+    shown = best;
+    dotEls.forEach((d, i) => d.classList.toggle('on', i === shown));
+    Sound.tick();
+  }
+  clearTimeout(settleT);
+  settleT = setTimeout(() => setSoup(shown), 140);
+}
+cardsEl.addEventListener('scroll', () => {
+  if (scrollRaf) return;
+  scrollRaf = requestAnimationFrame(() => { scrollRaf = 0; layoutCards(); });
+}, { passive: true });
+function scrollToCard(i, smooth = true) {
+  const el = cardEls[i];
+  cardsEl.scrollTo({ left: el.offsetLeft + el.offsetWidth / 2 - cardsEl.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
+}
+cardsEl.addEventListener('click', (e) => {
+  Sound.init();
+  const card = e.target.closest('.card');
+  if (!card) return;
+  const i = +card.dataset.i;
+  if (e.target.closest('.open') || i === shown) {
+    if (i !== shown) scrollToCard(i);
+    setSoup(i);
+    openSheet(i);
+  } else scrollToCard(i);
+});
+
+/* =====================================================================
+   CHANGER DE SOUPE
+   ===================================================================== */
+const root = document.documentElement;
+const metaTheme = $('meta[name="theme-color"]');
+function setMarquee(s) {
+  $$('.m1 span').forEach((el) => (el.textContent = `${s.short} ✦ `.repeat(6)));
+  $$('.m2 span').forEach((el) => (el.textContent = `${s.season} · ${s.time} min · ${s.level} · `.repeat(6)));
+}
+function tweenColor(c, hex, d = 1.2) {
+  const to = new THREE.Color(hex);
+  gsap.to(c, { r: to.r, g: to.g, b: to.b, duration: d, ease: 'power2.inOut' });
+}
+function setSoup(i, first = false) {
+  if (i === cur) return;
+  cur = i;
+  const s = SOUPS[i];
+  Object.entries(s.theme).forEach(([k, v]) => root.style.setProperty('--' + k, v));
+  metaTheme.setAttribute('content', s.theme.bg2);
+  if (first) {
+    setMarquee(s);
+    return;
+  }
+  gsap.to('.marquee', {
+    opacity: 0, duration: .3, onComplete: () => { setMarquee(s); gsap.to('.marquee', { opacity: 1, duration: .6 }); },
+  });
+  tweenColor(soupU.uColor.value, s.gl.color);
+  tweenColor(soupU.uCream.value, s.gl.cream);
+  tweenColor(soupU.uOil.value, s.gl.oil);
+  tweenColor(soupU.uSpeck.value, s.gl.speck);
+  tweenColor(glazeMat.color, s.gl.glaze, .9);
+  tweenColor(bubbleMat.color, s.gl.color);
+  gsap.to(soupU.uCreamAmt, { value: s.gl.creamAmt, duration: 1.2 });
+  gsap.to(soupU.uOilAmt, { value: s.gl.oilAmt, duration: 1.2 });
+  gsap.to(soupU.uSpeckAmt, { value: s.gl.speckAmt, duration: 1.2 });
+  items.forEach((it) => { if (it.state === 1) it.state = 2; else if (it.state === 0) it.state = 2; });
+  timers.forEach(clearTimeout); timers.clear();
+  swirl += 2.6;
+  hop();
+  Sound.whoosh();
+  steamBurst(1.8);
+  later(() => rain(reduced ? 6 : 12), 420);
+  if (sheetOpen) renderSheet();
+}
+function rain(n) {
+  const s = SOUPS[cur];
+  for (let k = 0; k < n; k++) later(() => spawnOne(pick(s.rain)), k * 110 + rand(60));
+}
+function hop(big = false) {
+  gsap.killTweensOf(bowlGroup.position); gsap.killTweensOf(bowlGroup.rotation); gsap.killTweensOf(bowlGroup.scale);
+  gsap.timeline()
+    .to(bowlGroup.scale, { x: 1.06, y: .9, z: 1.06, duration: .12, ease: 'power2.out' })
+    .to(bowlGroup.position, { y: big ? .8 : .45, duration: .28, ease: 'power2.out' })
+    .to(bowlGroup.scale, { x: .96, y: 1.06, z: .96, duration: .28 }, '<')
+    .to(bowlGroup.position, { y: 0, duration: .7, ease: 'bounce.out' })
+    .to(bowlGroup.scale, { x: 1, y: 1, z: 1, duration: .5, ease: 'elastic.out(1, .4)' }, '<.15');
+  gsap.to(bowlGroup.rotation, { y: '+=' + TAU / 3, duration: 1.2, ease: 'power3.inOut' });
+}
+function steamBurst(k = 2.5) {
+  gsap.fromTo(steamMat.uniforms.uIntensity, { value: k }, { value: 1, duration: 2.4, ease: 'power2.out' });
+}
+
+/* =====================================================================
+   FICHE RECETTE
+   ===================================================================== */
+const sheet = $('#sheet'), sheetScroll = $('#sheetScroll'), backdrop = $('#backdrop'), ui = $('.ui');
+gsap.set(sheet, { x: 0, y: 0, xPercent: isDesk() ? 120 : 0, yPercent: isDesk() ? 0 : 110 });
+let sheetOpen = false, sheetFor = -1, serves = 4, checked = new Set(), stepsDone = new Set(), wakeLock = null;
+const CHECK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const BADGE = `<svg viewBox="0 0 100 100"><defs><path id="cp" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs><text><textPath href="#cp">astuce du chef ✦ astuce du chef ✦ </textPath></text></svg><span>👩‍🍳</span>`;
+
+function renderSheet() {
+  const s = SOUPS[cur];
+  if (sheetFor !== cur) { sheetFor = cur; serves = s.serves; checked = new Set(); stepsDone = new Set(); }
+  const title = s.name.split(' ').map((w) => `<span class="w">${[...w].map((c) => `<span class="ch">${c}</span>`).join('')}</span>`).join(' ');
+  sheetScroll.innerHTML = `
+    <p class="eyebrow">N° 0${cur + 1} — ${s.season}</p>
+    <h1 class="r-title">${title}</h1>
+    <p class="r-sub">${s.tagline}</p>
+    <div class="r-stats">
+      <div class="stat"><b>${s.time}</b><small>minutes</small></div>
+      <div class="stat"><b>${s.level}</b><small>niveau</small></div>
+      <div class="stat serves"><div class="row"><button data-d="-1" aria-label="Moins">−</button><b id="servesN">${serves}</b><button data-d="1" aria-label="Plus">+</button></div><small>personnes</small></div>
+    </div>
+    <section class="r-sec">
+      <h3>Ingrédients <small id="count"></small></h3>
+      <div class="progress"><i id="prog"></i></div>
+      <ul class="ings">${s.ingredients.map((ing, k) => `
+        <li><button class="ing${checked.has(k) ? ' on' : ''}" data-k="${k}">
+          <span class="box">${CHECK}</span><span class="e">${ing.e}</span><span class="q"></span><span class="n"></span>
+        </button></li>`).join('')}
+      </ul>
+      <p class="mini">Coche un ingrédient : il plonge dans la marmite ↑</p>
+    </section>
+    <section class="r-sec">
+      <h3>Étapes <small>tape une étape quand c'est fait</small></h3>
+      <ol class="steps">${s.steps.map((st, k) => `
+        <li class="step${stepsDone.has(k) ? ' done' : ''}" data-k="${k}">
+          <span class="sn">${k + 1}</span>
+          <div><p>${st.t}</p>${st.min ? `<button class="tmr" data-min="${st.min}" data-label="${st.label}">⏱ Lancer ${st.min} min</button>` : ''}</div>
+        </li>`).join('')}
+      </ol>
+    </section>
+    <aside class="tip"><div class="badge">${BADGE}</div><p>${s.tip}</p></aside>
+    <p class="r-end">Bon appétit <span>✦</span></p>`;
+  updateQuantities(false);
+  updateProgress();
+}
+function updateQuantities(anim = true) {
+  const s = SOUPS[cur];
+  $$('.ing', sheetScroll).forEach((el) => {
+    const ing = s.ingredients[+el.dataset.k];
+    const q = ing.q == null ? null : ing.q * serves / s.serves;
+    $('.q', el).textContent = fmtQty(q, ing.u);
+    $('.n', el).textContent = fmtName(ing, q);
+  });
+  $('#servesN').textContent = serves;
+  if (anim) {
+    gsap.fromTo($$('.ing .q', sheetScroll), { scale: 1.35, color: s.theme.accent }, { scale: 1, color: 'inherit', duration: .5, stagger: .02, ease: 'back.out(3)', clearProps: 'color' });
+    gsap.fromTo('#servesN', { y: -8, scale: 1.4 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(3)' });
+  }
+}
+function updateProgress() {
+  const n = SOUPS[cur].ingredients.length;
+  $('#count').textContent = `${checked.size}/${n} dans la marmite`;
+  $('#prog').style.width = (checked.size / n * 100) + '%';
+}
+sheetScroll.addEventListener('click', (e) => {
+  Sound.init();
+  const s = SOUPS[cur];
+  const sv = e.target.closest('.serves button');
+  if (sv) { serves = clamp(serves + +sv.dataset.d, 1, 12); updateQuantities(); Sound.tick(); return; }
+  const ing = e.target.closest('.ing');
+  if (ing) {
+    const k = +ing.dataset.k;
+    if (checked.has(k)) { checked.delete(k); ing.classList.remove('on'); Sound.tick(); }
+    else {
+      checked.add(k); ing.classList.add('on');
+      spawn(s.ingredients[k].s);
+      buzz(12);
+      gsap.fromTo($('.e', ing), { y: 0, scale: 1 }, { keyframes: [{ y: -14, scale: 1.4, rotation: -15, duration: .18 }, { y: 0, scale: 1, rotation: 0, duration: .4, ease: 'bounce.out' }] });
+      if (checked.size === s.ingredients.length) later(celebrate, 900);
+    }
+    updateProgress();
+    return;
+  }
+  const tmr = e.target.closest('.tmr');
+  if (tmr) { startTimer(+tmr.dataset.min, tmr.dataset.label); return; }
+  const step = e.target.closest('.step');
+  if (step) {
+    const k = +step.dataset.k;
+    stepsDone.has(k) ? stepsDone.delete(k) : stepsDone.add(k);
+    step.classList.toggle('done');
+    Sound.tick();
+    if (stepsDone.size === s.steps.length) { swirl += 3; steamBurst(); toast('Toutes les étapes sont faites. À table ! 🥄'); }
+  }
+});
+
+function openSheet(i) {
+  if (sheetOpen) return;
+  sheetOpen = true;
+  renderSheet();
+  sheetScroll.scrollTop = 0;
+  ui.classList.add('sheet-open');
+  backdrop.classList.add('on');
+  sheet.style.visibility = 'visible';
+  const d = isDesk();
+  gsap.killTweensOf(sheet);
+  gsap.fromTo(sheet, { x: 0, y: 0, xPercent: d ? 120 : 0, yPercent: d ? 0 : 110 }, { x: 0, y: 0, xPercent: 0, yPercent: 0, duration: .8, ease: 'expo.out' });
+  gsap.from($$('.r-title .ch', sheetScroll), { yPercent: 110, opacity: 0, rotation: () => rand(-25, 25), duration: .7, stagger: .022, ease: 'back.out(2)', delay: .15 });
+  gsap.from($$('.eyebrow, .r-sub, .stat', sheetScroll), { y: 20, opacity: 0, duration: .6, stagger: .06, ease: 'power3.out', delay: .25 });
+  gsap.from($$('.ings li', sheetScroll), { x: 30, opacity: 0, duration: .5, stagger: .035, ease: 'power3.out', delay: .4 });
+  gsap.to(view, d ? { x: .17, y: .06, zoom: 1, duration: 1, ease: 'expo.inOut' } : { x: 0, y: .385, zoom: .5, duration: 1, ease: 'expo.inOut' });
+  history.pushState({ sheet: true }, '');
+  navigator.wakeLock?.request('screen').then((w) => (wakeLock = w)).catch(() => {});
+  Sound.whoosh();
+}
+function closeSheet() {
+  if (!sheetOpen) return;
+  sheetOpen = false;
+  ui.classList.remove('sheet-open');
+  backdrop.classList.remove('on');
+  const d = isDesk();
+  gsap.killTweensOf(sheet);
+  gsap.to(sheet, { ...(d ? { xPercent: 120 } : { yPercent: 110 }), duration: .5, ease: 'power3.in', onComplete: () => { sheet.style.visibility = 'hidden'; } });
+  gsap.to(view, { x: 0, y: d ? .1 : .14, zoom: 1, duration: .9, ease: 'expo.inOut' });
+  wakeLock?.release().catch(() => {}); wakeLock = null;
+  if (history.state?.sheet) history.back();
+}
+addEventListener('popstate', () => { if (sheetOpen) closeSheet(); });
+$('#close').addEventListener('click', closeSheet);
+backdrop.addEventListener('click', closeSheet);
+
+/* glisser la poignée pour fermer */
+{
+  const grab = $('#grab');
+  let y0 = null, dy = 0;
+  grab.addEventListener('pointerdown', (e) => { if (isDesk()) return; y0 = e.clientY; dy = 0; grab.setPointerCapture(e.pointerId); });
+  grab.addEventListener('pointermove', (e) => {
+    if (y0 == null) return;
+    dy = Math.max(0, e.clientY - y0);
+    gsap.set(sheet, { y: dy });
+  });
+  const end = () => {
+    if (y0 == null) return;
+    y0 = null;
+    if (dy > 110) closeSheet();
+    else gsap.to(sheet, { y: 0, duration: .5, ease: 'back.out(2)' });
+  };
+  grab.addEventListener('pointerup', end);
+  grab.addEventListener('pointercancel', end);
+}
+
+/* =====================================================================
+   MINUTEUR
+   ===================================================================== */
+const timerEl = $('#timer'), tlEl = $('#tl'), tnEl = $('#tn'), ringFg = $('#ringFg');
+const RING_C = 75.4;
+const T = { end: 0, total: 1, iv: 0 };
+function startTimer(min, label) {
+  Sound.init();
+  T.total = min * 60000; T.end = Date.now() + T.total;
+  tnEl.textContent = label;
+  timerEl.classList.remove('done'); timerEl.classList.add('on');
+  clearInterval(T.iv); T.iv = setInterval(tickTimer, 250); tickTimer();
+  toast(`⏱ Minuteur « ${label} » : ${min} min`);
+  Sound.tick();
+}
+function tickTimer() {
+  const left = Math.max(0, T.end - Date.now());
+  const s = Math.ceil(left / 1000);
+  tlEl.textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  ringFg.style.strokeDashoffset = RING_C * (1 - left / T.total);
+  if (left <= 0) {
+    clearInterval(T.iv);
+    timerEl.classList.add('done');
+    tlEl.textContent = "C'est prêt !";
+    Sound.ding(); buzz([220, 100, 220, 100, 500]);
+    steamBurst(3); hop();
+  }
+}
+timerEl.addEventListener('click', () => { clearInterval(T.iv); timerEl.classList.remove('on', 'done'); });
+
+/* =====================================================================
+   PETITS PLAISIRS
+   ===================================================================== */
+const toastEl = $('#toast');
+function toast(msg) {
+  toastEl.textContent = msg;
+  gsap.killTweensOf(toastEl);
+  gsap.timeline()
+    .fromTo(toastEl, { y: 30, opacity: 0, xPercent: -50, x: 0 }, { y: 0, opacity: 1, duration: .5, ease: 'back.out(2)' })
+    .to(toastEl, { opacity: 0, y: 16, duration: .4, delay: 2.4 });
+}
+toastEl.style.transform = 'none';
+function bowlScreen() {
+  const v = new THREE.Vector3(0, SOUP_Y, 0).applyMatrix4(bowlGroup.matrixWorld).project(camera);
+  return { x: (v.x + 1) / 2 * innerWidth, y: (1 - v.y) / 2 * innerHeight };
+}
+function burst(emojis, n = 26) {
+  const { x, y } = bowlScreen();
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('span');
+    el.className = 'burst'; el.textContent = pick(emojis);
+    document.body.appendChild(el);
+    const ang = rand(-Math.PI * .92, -Math.PI * .08), sp = rand(160, 420);
+    gsap.set(el, { x, y, xPercent: -50, yPercent: -50, scale: rand(.6, 1.4), rotation: rand(-40, 40) });
+    gsap.to(el, { x: x + Math.cos(ang) * sp * 1.3, duration: 1.7, ease: 'power1.out' });
+    gsap.to(el, { y: y + Math.sin(ang) * sp, duration: .55, ease: 'power2.out' });
+    gsap.to(el, { y: innerHeight + 80, duration: 1.1, delay: .55, ease: 'power2.in', onComplete: () => el.remove() });
+    gsap.to(el, { rotation: '+=' + rand(-360, 360), duration: 1.7 });
+  }
+}
+function celebrate() {
+  const s = SOUPS[cur];
+  burst([...s.emo, ...s.ingredients.map((i) => i.e), '✨', '🥄']);
+  steamBurst(3.2); hop(true); swirl += 4;
+  Sound.ding(); buzz([30, 60, 30]);
+  toast('Tout est dans la marmite. Bon appétit ! 🍲');
+}
+
+$('#dice').addEventListener('click', () => {
+  Sound.init();
+  let i; do { i = Math.floor(Math.random() * SOUPS.length); } while (i === shown && SOUPS.length > 1);
+  gsap.fromTo('#dice svg', { rotation: 0 }, { rotation: 720, duration: .8, ease: 'power3.out' });
+  scrollToCard(i);
+  if (sheetOpen) setSoup(i);
+});
+const soundBtn = $('#sound');
+function paintSound() {
+  $('.on-ic', soundBtn).style.display = Sound.on ? '' : 'none';
+  $('.off-ic', soundBtn).style.display = Sound.on ? 'none' : '';
+}
+paintSound();
+soundBtn.addEventListener('click', () => {
+  Sound.on = !Sound.on;
+  localStorage.setItem('soupes-sound', Sound.on ? 'on' : 'off');
+  Sound.init(); paintSound();
+  if (Sound.on) Sound.plop(1.4, .25);
+});
+addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeSheet();
+  if (sheetOpen) return;
+  if (e.key === 'ArrowRight') scrollToCard(Math.min(SOUPS.length - 1, shown + 1));
+  if (e.key === 'ArrowLeft') scrollToCard(Math.max(0, shown - 1));
+  if (e.key === 'Enter') openSheet(shown);
+});
+
+const hintEl = $('#hint');
+let hintGone = false;
+function showHint() { if (!hintGone) hintEl.classList.add('on'); later(hideHint, 9000); }
+function hideHint() { if (hintGone) return; hintGone = true; hintEl.classList.remove('on'); }
+
+/* =====================================================================
+   DÉMARRAGE
+   ===================================================================== */
+setSoup(0, true);
+dotEls[0].classList.add('on');
+layoutCards();
+bowlGroup.position.y = 7;
+renderer.setAnimationLoop(loop);
+
+const go = () => {
+  const tl = gsap.timeline();
+  tl.to('#intro h1 span', { yPercent: -130, opacity: 0, stagger: .045, duration: .45, ease: 'power3.in' })
+    .to('#intro p, #intro .steam', { opacity: 0, duration: .3 }, '<')
+    .to('#intro', { clipPath: 'inset(0% 0% 100% 0%)', duration: .9, ease: 'expo.inOut' }, '-=.05')
+    .add(() => $('#intro').remove())
+    .to(bowlGroup.position, { y: 0, duration: 1.2, ease: 'bounce.out' }, '-=.75')
+    .from('.top > *', { y: -50, opacity: 0, stagger: .1, duration: .8, ease: 'back.out(2)' }, '-=.9')
+    .from('.cards', { y: 260, duration: 1.1, ease: 'expo.out' }, '<.1')
+    .from('.dots', { opacity: 0, duration: .5 }, '<.4')
+    .add(() => { rain(reduced ? 6 : 14); showHint(); }, '-=.9');
+};
+// laisse la police et le premier rendu arriver, mais n'attend jamais trop
+Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))]).then(() => setTimeout(go, 450));
+</script>
+</body>
+</html>
